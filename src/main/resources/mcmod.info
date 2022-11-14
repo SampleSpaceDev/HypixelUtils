@@ -1,0 +1,16 @@
+[
+{
+  "modid": "hypixelutils",
+  "name": "Hypixel Utils",
+  "description": "General utilities and features for Hypixel.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["lqchy_"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
