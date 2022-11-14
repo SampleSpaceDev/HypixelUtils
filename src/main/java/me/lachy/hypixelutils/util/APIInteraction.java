@@ -10,6 +10,7 @@ import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -87,20 +88,32 @@ public class APIInteraction {
                 .url(BASE_URL + "/map/" + id)
                 .build();
         return this.asyncRequest(request).thenApply(response -> {
-            if (response.isSuccessful()) {
-                ResponseBody body = response.body();
-                if (body == null) {
-                    return null;
-                }
-                JsonObject object = this.jsonParser.parse(new JsonReader(body.charStream())).getAsJsonObject();
-                return new BedwarsMap(
-                        object.get("id").getAsString(),
-                        MapPool.getById(object.get("pool").getAsString()),
-                        object.get("name").getAsString(),
-                        object.get("festival").getAsString()
-                );
+            ResponseBody body = response.body();
+            if (body == null) {
+                return null;
             }
-            return null;
+            JsonObject object = this.jsonParser.parse(new JsonReader(body.charStream())).getAsJsonObject();
+            return new BedwarsMap(
+                    object.get("id").getAsString(),
+                    MapPool.getById(object.get("pool").getAsString()),
+                    object.get("name").getAsString(),
+                    object.get("festival").getAsString()
+            );
+        });
+    }
+
+    public CompletableFuture<Instant> getLastRotation() {
+        Request request = new Request.Builder()
+                .url(BASE_URL + "/rotation/latest")
+                .build();
+        return this.asyncRequest(request).thenApply(response -> {
+            ResponseBody body = response.body();
+            if (body == null) {
+                return Instant.EPOCH;
+            }
+            JsonObject object = this.jsonParser.parse(new JsonReader(body.charStream())).getAsJsonObject();
+            long timestamp = object.get("timestamp").getAsLong();
+            return Instant.ofEpochMilli(timestamp);
         });
     }
 

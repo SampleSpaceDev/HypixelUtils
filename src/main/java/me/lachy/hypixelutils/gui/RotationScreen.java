@@ -1,6 +1,6 @@
 package me.lachy.hypixelutils.gui;
 
-import me.lachy.hypixelutils.util.*;
+import me.lachy.hypixelutils.util.APIInteraction;
 import me.lachy.hypixelutils.util.rotation.BedwarsMap;
 import me.lachy.hypixelutils.util.rotation.MapPool;
 import me.lachy.hypixelutils.util.rotation.MinecraftColour;
@@ -8,17 +8,24 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 public class RotationScreen extends GuiScreen {
 
     private static final String TITLE = "BedWars Map Rotation";
     private final MapPool[] mapPools;
+    private final SimpleDateFormat formatter = new SimpleDateFormat("EEEE, d MMMM yyyy HH:mm", Locale.ENGLISH);
+    private Date lastRotation;
     private boolean loaded = false;
+
 
     public RotationScreen(MapPool... mapPools) {
         this.mapPools = mapPools;
         APIInteraction.get().refreshMapCache(this.mapPools).thenAccept(aVoid -> this.loaded = true);
+        APIInteraction.get().getLastRotation().thenAccept(instant -> this.lastRotation = Date.from(instant));
     }
 
     @Override
@@ -33,6 +40,8 @@ public class RotationScreen extends GuiScreen {
 
         if (!this.loaded) {
             this.drawCenteredString(this.fontRendererObj, "Refeshing...", this.width / 2, 120, MinecraftColour.BLUE.getARGB());
+        } else {
+            this.drawCenteredString(this.fontRendererObj, String.format("Last Rotation: %s", this.formatter.format(this.lastRotation)), this.width / 2, this.height - 110, MinecraftColour.BLUE.getARGB());
         }
 
         int colWidth = this.width / (this.mapPools.length);
