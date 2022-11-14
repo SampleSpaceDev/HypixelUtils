@@ -1,7 +1,4 @@
-package me.lachy.hypixelutils.util;
-
-import java.util.Arrays;
-import java.util.Objects;
+package me.lachy.hypixelutils.util.rotation;
 
 public enum MapPool {
     EIGHT_SLOW("BEDWARS_8TEAMS_SLOW", "8 Teams Long & Tactical"),

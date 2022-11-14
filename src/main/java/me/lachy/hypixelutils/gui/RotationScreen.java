@@ -1,6 +1,9 @@
 package me.lachy.hypixelutils.gui;
 
 import me.lachy.hypixelutils.util.*;
+import me.lachy.hypixelutils.util.rotation.BedwarsMap;
+import me.lachy.hypixelutils.util.rotation.MapPool;
+import me.lachy.hypixelutils.util.rotation.MinecraftColour;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;

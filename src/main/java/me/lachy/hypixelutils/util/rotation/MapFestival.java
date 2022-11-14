@@ -1,4 +1,4 @@
-package me.lachy.hypixelutils.util;
+package me.lachy.hypixelutils.util.rotation;
 
 public enum MapFestival {
     NONE(MinecraftColour.GRAY),

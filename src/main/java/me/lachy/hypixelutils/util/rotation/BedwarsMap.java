@@ -1,4 +1,4 @@
-package me.lachy.hypixelutils.util;
+package me.lachy.hypixelutils.util.rotation;
 
 public class BedwarsMap {
     private final String id;

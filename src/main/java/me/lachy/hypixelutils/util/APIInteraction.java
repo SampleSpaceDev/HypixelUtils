@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import me.lachy.hypixelutils.util.rotation.BedwarsMap;
+import me.lachy.hypixelutils.util.rotation.MapPool;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 

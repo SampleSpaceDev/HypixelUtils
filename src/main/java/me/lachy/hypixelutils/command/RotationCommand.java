@@ -1,14 +1,13 @@
 package me.lachy.hypixelutils.command;
 
-import com.google.common.collect.Lists;
 import me.lachy.hypixelutils.gui.RotationScreen;
-import me.lachy.hypixelutils.util.MapPool;
+import me.lachy.hypixelutils.util.rotation.MapPool;
 import me.lachy.hypixelutils.util.Scheduler;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,7 +59,7 @@ public class RotationCommand implements ICommand {
     }
 
     @Override
-    public int compareTo(ICommand iCommand) {
+    public int compareTo(@NotNull ICommand iCommand) {
         return 0;
     }
 }
