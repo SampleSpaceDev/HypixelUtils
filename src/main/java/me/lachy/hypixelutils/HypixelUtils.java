@@ -1,17 +1,16 @@
 package me.lachy.hypixelutils;
 
-import com.cecer1.projects.mc.cecermclib.common.CecerMCLib;
-import com.cecer1.projects.mc.cecermclib.common.modules.chatmetadata.ChatMetadataModule;
+import com.cecer1.projects.mc.cecermclib.common.modules.ModuleRegistrationCallback;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import me.lachy.hypixelutils.chat.ChatProcessor;
 import me.lachy.hypixelutils.command.RotationCommand;
+import me.lachy.hypixelutils.modules.locraw.LocrawModule;
 import me.lachy.hypixelutils.util.Scheduler;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -25,11 +24,17 @@ public class HypixelUtils {
             .create();
 
     @Mod.EventHandler
+    public void onFMLPreInitialization(FMLPreInitializationEvent event) {
+        ModuleRegistrationCallback.EVENT.register(ctx -> {
+            System.out.println("Module registration!");
+            ctx.registerModule(new LocrawModule());
+        });
+    }
+
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new RotationCommand());
         MinecraftForge.EVENT_BUS.register(this);
-
-        CecerMCLib.get(ChatMetadataModule.class).registerProcessor(new ChatProcessor());
     }
 
     @SubscribeEvent

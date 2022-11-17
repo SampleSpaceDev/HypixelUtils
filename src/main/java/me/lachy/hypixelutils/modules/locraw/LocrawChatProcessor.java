@@ -1,15 +1,13 @@
-package me.lachy.hypixelutils.chat;
+package me.lachy.hypixelutils.modules.locraw;
 
 import com.cecer1.projects.mc.cecermclib.common.modules.chatmetadata.ChatMessageData;
 import com.cecer1.projects.mc.cecermclib.common.modules.chatmetadata.IChatMetadata;
 import com.cecer1.projects.mc.cecermclib.common.modules.chatmetadata.IChatProcessor;
 import com.cecer1.projects.mc.cecermclib.common.modules.chatmetadata.ProcessedChatMessageEventData;
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import me.lachy.hypixelutils.HypixelUtils;
-import net.minecraft.client.Minecraft;
 
-public class ChatProcessor implements IChatProcessor {
+public class LocrawChatProcessor implements IChatProcessor {
 
     @Override
     public void process(ProcessedChatMessageEventData.Builder builder, ChatMessageData chatMessageData) {
@@ -18,7 +16,6 @@ public class ChatProcessor implements IChatProcessor {
             return;
         }
         builder.addMetadata(metadata);
-        Minecraft.getMinecraft().thePlayer.sendChatMessage(String.format("You are in server %s!", metadata.getServer()));
     }
 
     public static class LocrawMetadata implements IChatMetadata {
