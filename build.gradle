@@ -36,8 +36,8 @@ minecraft {
 
 dependencies {
     shadow 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.cecer1.projects.mc.cecermclib:cecermclib-forge:0.1.71-SNAPSHOT:dev'
-    implementation 'com.cecer1.projects.mc.cecermclib:cecermclib-common:0.1.71-SNAPSHOT'
+    implementation 'com.cecer1.projects.mc.cecermclib:cecermclib-forge:0.1.72-SNAPSHOT:dev'
+    implementation 'com.cecer1.projects.mc.cecermclib:cecermclib-common:0.1.72-SNAPSHOT'
 }
 
 processResources {
