@@ -15,8 +15,10 @@ import me.lachy.hypixelutils.util.MinecraftColour;
 import net.minecraft.client.gui.FontRenderer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TeamUpgradeDisplayModule implements IModule {
 
@@ -46,11 +48,15 @@ public class TeamUpgradeDisplayModule implements IModule {
                     .openTransformation()) {
 
                 if (!this.upgrades.isEmpty()) {
-                    fontRenderer.drawString("Purchased Upgrades:", 5, 5, MinecraftColour.GREEN.getARGB());
+                    fontRenderer.drawStringWithShadow("\u00a7nPurchased Upgrades:", 5, 5, MinecraftColour.GREEN.getARGB());
                 }
 
-                int y = fontRenderer.FONT_HEIGHT + 6;
-                for (Map.Entry<TeamUpgrade, String> entry : this.upgrades.entrySet()) {
+                int y = fontRenderer.FONT_HEIGHT + 8;
+                List<Map.Entry<TeamUpgrade, String>> entries = this.upgrades.entrySet().stream()
+                        .sorted((entry, e) -> entry.getKey().ordinal())
+                        .collect(Collectors.toList());
+
+                for (Map.Entry<TeamUpgrade, String> entry : entries) {
                     String upgrade = entry.getKey().getNiceName();
                     String purchaser = entry.getValue();
 
@@ -59,6 +65,7 @@ public class TeamUpgradeDisplayModule implements IModule {
                     fontRenderer.drawStringWithShadow(String.format("(%s)", purchaser),
                             5 + fontRenderer.getStringWidth(upgrade + " "), y,
                             MinecraftColour.GRAY.getARGB());
+                    y += fontRenderer.FONT_HEIGHT + 2;
                 }
             }
         });
