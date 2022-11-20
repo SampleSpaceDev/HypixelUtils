@@ -1,4 +1,4 @@
-package me.lachy.hypixelutils.util.rotation;
+package me.lachy.hypixelutils.util;
 
 import net.minecraft.util.EnumChatFormatting;
 

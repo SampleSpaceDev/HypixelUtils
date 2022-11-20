@@ -1,5 +1,7 @@
 package me.lachy.hypixelutils.util.rotation;
 
+import me.lachy.hypixelutils.util.MinecraftColour;
+
 public enum MapFestival {
     NONE(MinecraftColour.GRAY),
     NEW_YEAR(MinecraftColour.BLUE),

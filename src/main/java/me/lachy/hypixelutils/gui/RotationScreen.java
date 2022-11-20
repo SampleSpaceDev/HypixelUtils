@@ -3,7 +3,7 @@ package me.lachy.hypixelutils.gui;
 import me.lachy.hypixelutils.util.APIInteraction;
 import me.lachy.hypixelutils.util.rotation.BedwarsMap;
 import me.lachy.hypixelutils.util.rotation.MapPool;
-import me.lachy.hypixelutils.util.rotation.MinecraftColour;
+import me.lachy.hypixelutils.util.MinecraftColour;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumChatFormatting;
