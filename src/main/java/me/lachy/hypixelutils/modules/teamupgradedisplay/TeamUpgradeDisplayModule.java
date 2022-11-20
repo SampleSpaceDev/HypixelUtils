@@ -14,10 +14,7 @@ import com.google.common.collect.ImmutableSet;
 import me.lachy.hypixelutils.util.MinecraftColour;
 import net.minecraft.client.gui.FontRenderer;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TeamUpgradeDisplayModule implements IModule {
@@ -47,13 +44,14 @@ public class TeamUpgradeDisplayModule implements IModule {
                     .translate(0, 0)
                     .openTransformation()) {
 
-                if (!this.upgrades.isEmpty()) {
-                    fontRenderer.drawStringWithShadow("\u00a7nPurchased Upgrades:", 5, 5, MinecraftColour.GREEN.getARGB());
+                if (this.upgrades.isEmpty()) {
+                    return;
                 }
+                fontRenderer.drawStringWithShadow("\u00a7nPurchased Upgrades:", 5, 5, MinecraftColour.GREEN.getARGB());
 
                 int y = fontRenderer.FONT_HEIGHT + 8;
                 List<Map.Entry<TeamUpgrade, String>> entries = this.upgrades.entrySet().stream()
-                        .sorted((entry, e) -> entry.getKey().ordinal())
+                        .sorted(Comparator.comparing(entry -> entry.getKey().ordinal()))
                         .collect(Collectors.toList());
 
                 for (Map.Entry<TeamUpgrade, String> entry : entries) {
@@ -73,5 +71,9 @@ public class TeamUpgradeDisplayModule implements IModule {
 
     public void addUpgrade(TeamUpgrade upgrade, String purchaser) {
         this.upgrades.put(upgrade, purchaser);
+    }
+
+    public void clearUpgrades() {
+        this.upgrades.clear();
     }
 }
