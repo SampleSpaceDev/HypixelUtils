@@ -11,15 +11,16 @@ import com.cecer1.projects.mc.cecermclib.forge.modules.rendering.SafeHudRenderCa
 import com.cecer1.projects.mc.cecermclib.forge.modules.rendering.context.AbstractCanvas;
 import com.cecer1.projects.mc.cecermclib.forge.modules.rendering.context.TransformCanvas;
 import com.google.common.collect.ImmutableSet;
+import me.lachy.hypixelutils.util.MinecraftColour;
 import net.minecraft.client.gui.FontRenderer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class TeamUpgradeDisplayModule implements IModule {
 
-    private final List<TeamUpgrade> upgrades = new ArrayList<>();
+    private final Map<TeamUpgrade, String> upgrades = new HashMap<>();
 
 
     @Override
@@ -43,15 +44,27 @@ public class TeamUpgradeDisplayModule implements IModule {
             try (TransformCanvas canvas1 = canvas.transform()
                     .translate(0, 0)
                     .openTransformation()) {
-                for (int i = 0; i < this.upgrades.size(); i++) {
-                    TeamUpgrade upgrade = this.upgrades.get(i);
-                    fontRenderer.drawStringWithShadow(upgrade.name(), 0, fontRenderer.FONT_HEIGHT * i, 0xFFCFEFFF);
+
+                if (!this.upgrades.isEmpty()) {
+                    fontRenderer.drawString("Purchased Upgrades:", 5, 5, MinecraftColour.GREEN.getARGB());
+                }
+
+                int y = fontRenderer.FONT_HEIGHT + 6;
+                for (Map.Entry<TeamUpgrade, String> entry : this.upgrades.entrySet()) {
+                    String upgrade = entry.getKey().getNiceName();
+                    String purchaser = entry.getValue();
+
+                    fontRenderer.drawStringWithShadow(upgrade, 5, y, MinecraftColour.GOLD.getARGB());
+
+                    fontRenderer.drawStringWithShadow(String.format("(%s)", purchaser),
+                            5 + fontRenderer.getStringWidth(upgrade + " "), y,
+                            MinecraftColour.GRAY.getARGB());
                 }
             }
         });
     }
 
-    public void addUpgrade(TeamUpgrade upgrade) {
-        this.upgrades.add(upgrade);
+    public void addUpgrade(TeamUpgrade upgrade, String purchaser) {
+        this.upgrades.put(upgrade, purchaser);
     }
 }

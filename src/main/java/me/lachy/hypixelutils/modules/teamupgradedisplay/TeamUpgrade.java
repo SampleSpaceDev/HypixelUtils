@@ -1,5 +1,7 @@
 package me.lachy.hypixelutils.modules.teamupgradedisplay;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 public enum TeamUpgrade {
 
     SHARPENED_SWORDS,
@@ -21,5 +23,9 @@ public enum TeamUpgrade {
 
     public static TeamUpgrade fromString(String parsed) {
         return valueOf(parsed.replace(" ", "_").toUpperCase());
+    }
+
+    public String getNiceName() {
+        return WordUtils.capitalizeFully(this.name().toLowerCase().replace("_", ""));
     }
 }
