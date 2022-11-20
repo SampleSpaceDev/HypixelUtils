@@ -4,7 +4,10 @@ import com.cecer1.projects.mc.cecermclib.common.modules.ModuleRegistrationCallba
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.lachy.hypixelutils.command.RotationCommand;
+import me.lachy.hypixelutils.modules.ingameoverlay.InGameOverlayModule;
 import me.lachy.hypixelutils.modules.locraw.LocrawModule;
+import me.lachy.hypixelutils.modules.mapdisplay.MapDisplayModule;
+import me.lachy.hypixelutils.modules.teamupgradedisplay.TeamUpgradeDisplayModule;
 import me.lachy.hypixelutils.util.Scheduler;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,8 +29,10 @@ public class HypixelUtils {
     @Mod.EventHandler
     public void onFMLPreInitialization(FMLPreInitializationEvent event) {
         ModuleRegistrationCallback.EVENT.register(ctx -> {
-            System.out.println("Module registration!");
             ctx.registerModule(new LocrawModule());
+            ctx.registerModule(new MapDisplayModule());
+            ctx.registerModule(new InGameOverlayModule());
+            ctx.registerModule(new TeamUpgradeDisplayModule());
         });
     }
 
