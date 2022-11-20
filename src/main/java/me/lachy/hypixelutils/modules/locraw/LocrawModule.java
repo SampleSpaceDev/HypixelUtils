@@ -15,7 +15,7 @@ import java.util.Set;
 
 public class LocrawModule implements IModule {
 
-    private LocrawChatProcessor.LocrawMetadata lastState;
+    private LocrawMetadata lastState;
 
     @Override
     public boolean isEnvironmentSupported(AbstractEnvironment environment) {
@@ -29,12 +29,10 @@ public class LocrawModule implements IModule {
 
     @Override
     public void onModuleRegister() {
-        IModule.super.onModuleRegister();
-
         AllModulesRegisteredCallback.EVENT.register(() -> CecerMCLib.get(ChatMetadataModule.class).registerProcessor(new LocrawChatProcessor()));
 
         ProcessedChatMessageCallback.EVENT.register(data -> {
-            LocrawChatProcessor.LocrawMetadata metadata = data.getMetadata(LocrawChatProcessor.LocrawMetadata.class);
+            LocrawMetadata metadata = data.getMetadata(LocrawMetadata.class);
             if (metadata != null) {
                 this.lastState = metadata;
                 Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(this.lastState.getServer()));
@@ -42,7 +40,7 @@ public class LocrawModule implements IModule {
         });
     }
 
-    public LocrawChatProcessor.LocrawMetadata get() {
+    public LocrawMetadata get() {
         return this.lastState;
     }
 }
