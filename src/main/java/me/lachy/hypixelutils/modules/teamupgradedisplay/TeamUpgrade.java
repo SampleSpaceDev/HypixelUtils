@@ -1,24 +1,25 @@
 package me.lachy.hypixelutils.modules.teamupgradedisplay;
 
-import org.apache.commons.lang3.text.WordUtils;
-
 public enum TeamUpgrade {
 
-    SHARPENED_SWORDS,
-    REINFORCED_ARMOR_I,
-    REINFORCED_ARMOR_II,
-    REINFORCED_ARMOR_III,
-    REINFORCED_ARMOR_IV,
-    MANIAC_MINER_I,
-    MANIAC_MINER_II,
-    IRON_FORGE,
-    GOLDEN_FORGE,
-    EMERALD_FORGE,
-    MOLTEN_FORGE,
-    HEAL_POOL,
-    DRAGON_BUFF;
+    SHARPENED_SWORDS("Sharpened Swords"),
+    REINFORCED_ARMOR_I("Reinforced Armor I"),
+    REINFORCED_ARMOR_II("Reinforced Armor II"),
+    REINFORCED_ARMOR_III("Reinforced Armor III"),
+    REINFORCED_ARMOR_IV("Reinforced Armor IV"),
+    MANIAC_MINER_I("Maniac Miner I"),
+    MANIAC_MINER_II("Maniac Miner II"),
+    IRON_FORGE("Iron Forge"),
+    GOLDEN_FORGE("Golden Forge"),
+    EMERALD_FORGE("Emerald Forge"),
+    MOLTEN_FORGE("Molten Forge"),
+    HEAL_POOL("Heal Pool"),
+    DRAGON_BUFF("Dragon Buff");
 
-    TeamUpgrade() {
+    private final String niceName;
+
+    TeamUpgrade(String niceName) {
+        this.niceName = niceName;
     }
 
     public static TeamUpgrade fromString(String parsed) {
@@ -26,6 +27,6 @@ public enum TeamUpgrade {
     }
 
     public String getNiceName() {
-        return WordUtils.capitalizeFully(this.name().toLowerCase().replace("_", ""));
+        return this.niceName;
     }
 }
