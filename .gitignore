@@ -19,7 +19,7 @@ build
 
 # other
 eclipse
-run
+run/
 CREDITS-fml.txt
 LICENSE-fml.txt
 MinecraftForge-Credits.txt

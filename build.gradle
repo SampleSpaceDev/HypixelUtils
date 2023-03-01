@@ -24,7 +24,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 version = "1.0"
-group= "me.lachy.hypixelutils"
+group= "dev.samplespace.hypixelutils"
 archivesBaseName = "hypixelutils"
 
 minecraft {
@@ -36,6 +36,7 @@ minecraft {
 
 dependencies {
     shadow 'com.squareup.okhttp3:okhttp:4.10.0'
+    compile 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.cecer1.projects.mc.cecermclib:cecermclib-forge:0.1.72-SNAPSHOT:dev'
     implementation 'com.cecer1.projects.mc.cecermclib:cecermclib-common:0.1.72-SNAPSHOT'
 }
